@@ -153,10 +153,10 @@ function loadModel(path) {
 
     loader.load(
         path,
-        function ( object ) {
+        ( object ) => {
             scene.add( object );
             object.scale.set(0.025, 0.025, 0.025);
-            object.traverse( function ( child ) {
+            object.traverse( ( child ) => {
 
                 if ( child instanceof THREE.Mesh ) {
 
@@ -181,8 +181,8 @@ function loadModel(path) {
 
             ring = object;
         },
-        function ( xhr ) {},
-        function ( error ) {}
+        ( xhr ) => {},
+        ( error ) => {}
     );
 }
 
@@ -193,7 +193,7 @@ function isGem(object) {
 function initModelChanging(models) {
     var select = document.createElement("select");
     var label = document.createElement("label");
-    models.forEach(model => {
+    models.forEach((model) => {
         var opt = document.createElement("option");
         opt.value = model.value;
         opt.innerHTML = model.text;
@@ -212,7 +212,7 @@ function initModelChanging(models) {
 function initColorChanging(colors, material, labelContent) {
     var select = document.createElement("select");
     var label = document.createElement("label");
-    colors.forEach(color => {
+    colors.forEach((color) => {
         var opt = document.createElement("option");
         opt.value = color.value;
         opt.innerHTML = color.text;
@@ -223,7 +223,7 @@ function initColorChanging(colors, material, labelContent) {
     document.body.appendChild(label);
     document.body.appendChild(select);
 
-    select.onchange = ()=>{
+    select.onchange = () => {
         if (material) {
             console.log(select.value);
             material.color = new THREE.Color( parseInt(select.value) );
