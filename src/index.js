@@ -1,22 +1,22 @@
 
-THREE = require('three');
+const THREE = require('three');
 require('./loaders/OBJLoader.js');
 require('./controls/OrbitControls');
 
 
-var camera, scene, renderer, controls;
-var geometry, material, ring;
+let camera, scene, renderer, controls;
+let geometry, material, ring;
 
-var gemBackMaterial;
+let gemBackMaterial;
 
-var ringColors = [
+const ringColors = [
     {text: "Gold", value: "0xb19e0a"},
     {text: "Dark Gold", value: "0x916e0a"},
     {text: "Red Gold", value: "0x914e0a"},
     {text: "Silver", value: "0x607d8b"}
 ];
 
-var gemColors = [
+const gemColors = [
     {text: "Light blue", value: "0xffffff"},
     {text: "Blue", value: "0x0088ff"},
     {text: "Red", value: "0xff0000"},
@@ -26,7 +26,7 @@ var gemColors = [
     {text: "Yellow", value: "0xffeb3b"}
 ];
 
-var modelList = [
+const modelList = [
     {text: "Ring 1", value: "../models/ring3/OBJ.obj"},
     {text: "Ring 2", value: "../models/ring1/OBJ.obj"},
     {text: "Ring 3", value: "../models/ring2/OBJ.obj"},
@@ -49,10 +49,10 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color( 0xffffff );
 
-    var ambient = new THREE.AmbientLight( 0xefefff );
+    let ambient = new THREE.AmbientLight( 0xefefff );
     scene.add( ambient );
 
-    var dirLight = new THREE.DirectionalLight( 0xeeeeff );
+    let dirLight = new THREE.DirectionalLight( 0xeeeeff );
     dirLight.name = 'Dir. Light';
     dirLight.castShadow = true;
     dirLight.shadow.camera.near = 1;
@@ -68,14 +68,14 @@ function init() {
     dirLight.lookAt(0, 0, 0);
     scene.add( dirLight );
 
-    var geometryg = new THREE.BoxGeometry( 100, 0.15, 100 );
-    var materialg = new THREE.MeshPhongMaterial( {
+    let geometryg = new THREE.BoxGeometry( 100, 0.15, 100 );
+    let materialg = new THREE.MeshPhongMaterial( {
         color: 0xa0adaf,
         shininess: 150,
         specular: 0x111111
     } );
 
-    var ground = new THREE.Mesh( geometryg, materialg );
+    let ground = new THREE.Mesh( geometryg, materialg );
     ground.position.y = -0.94;
     ground.scale.multiplyScalar( 3 );
     ground.castShadow = false;
@@ -83,14 +83,14 @@ function init() {
     scene.add( ground );
 
 
-    var path = "../assets/textures/cube/";
-    var format = '.jpg';
-    var urls = [
+    const path = "../assets/textures/cube/";
+    const format = '.jpg';
+    let urls = [
         path + 'px' + format, path + 'nx' + format,
         path + 'py' + format, path + 'ny' + format,
         path + 'pz' + format, path + 'nz' + format
     ];
-    var reflectionCube = new THREE.CubeTextureLoader().load( urls );
+    let reflectionCube = new THREE.CubeTextureLoader().load( urls );
     reflectionCube.format = THREE.RGBFormat;
 
 
@@ -145,7 +145,7 @@ function onWindowResize() {
 }
 
 function loadModel(path) {
-    var loader = new THREE.OBJLoader();
+    let loader = new THREE.OBJLoader();
 
     if (ring) {
         scene.remove(ring);
@@ -191,10 +191,10 @@ function isGem(object) {
 }
 
 function initModelChanging(models) {
-    var select = document.createElement("select");
-    var label = document.createElement("label");
+    let select = document.createElement("select");
+    let label = document.createElement("label");
     models.forEach((model) => {
-        var opt = document.createElement("option");
+        let opt = document.createElement("option");
         opt.value = model.value;
         opt.innerHTML = model.text;
         select.appendChild(opt);
@@ -210,10 +210,10 @@ function initModelChanging(models) {
 }
 
 function initColorChanging(colors, material, labelContent) {
-    var select = document.createElement("select");
-    var label = document.createElement("label");
+    let select = document.createElement("select");
+    let label = document.createElement("label");
     colors.forEach((color) => {
-        var opt = document.createElement("option");
+        let opt = document.createElement("option");
         opt.value = color.value;
         opt.innerHTML = color.text;
         select.appendChild(opt);
